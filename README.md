@@ -1,67 +1,36 @@
-ThreatSpy-Analyzer
+# Secure Backend Auth Toolkit
 
-Static malware analysis engine for binary signature verification and threat hunting.
+## Summary
+
+A reference implementation of security-hardened authentication and data-protection patterns for backend systems, built with Python and FastAPI. This project reflects engineering practices applied across backend work — encryption, secure session handling, and defensive coding patterns — that inform how I approach security review more broadly, including in protocol-level and smart contract auditing.
+
+**Status:** Active development
 
 ## Features
 
-- **PE/ELF binary parsing** and structure analysis
-- **Signature-based detection** (YARA rules)
-- **Entropy analysis** for packed/encrypted binaries
-- **Import/export table inspection**
-- **String extraction** and pattern matching
+- JWT-based authentication with proper expiry and refresh-token handling
+- Password hashing via Argon2 (memory-hard, resistant to GPU cracking)
+- AES-256 encryption for sensitive data at rest
+- Input validation and rate-limiting patterns to reduce common attack surface
+- Structured for easy security review — clear separation of auth logic, crypto operations, and request handling
 
-## Quick Start
+## Tech Stack
 
-```bash
-git clone https://github.com/Mustafa-SeniorDev/threatspy-analyzer.git
-cd threatspy-analyzer
-pip install -r requirements.txt
-python src/main.py /path/to/suspicious/binary
-```
+- **Backend:** Python, FastAPI, PostgreSQL
+- **Security:** `argon2-cffi`, `pyjwt`, `cryptography` (AES-256-GCM)
+- **Testing:** pytest, with test cases covering auth edge cases and token expiry behavior
 
-Technical Capabilities
+## Why This Repo Exists
 
-Binary Analysis
+Good protocol and smart contract security research is built on solid fundamentals in applied cryptography and secure system design. This toolkit is where I apply and test those fundamentals in a traditional backend context — the same verification-first mindset carries over to my ZK protocol and smart contract security research.
 
-· PE (Portable Executable) for Windows binaries
-· ELF (Executable and Linkable Format) for Linux binaries
-· Mach-O for macOS (limited support)
+## Related Work
 
-Detection Methods
+- [zkVerify BN254 Point-Validation Research](https://github.com/Mustafa-SeniorDev/zkVerify-BN254-PointValidation-Research)
+- [Zeko Protocol Fee-Payer Authorization Research](https://github.com/Mustafa-SeniorDev/Zeko-Protocol-FeePayer-Authorization-Research)
+- [ZK-Verifier Point-Validation Checker](https://github.com/Mustafa-SeniorDev/ZK-Verifier-PointValidation-Checker)
 
-Method Description Accuracy
-YARA Rules Pattern matching against known malware 95%+
-Entropy Score Detect packed/encrypted sections 85%
-Import Analysis Flag suspicious API calls 90%
+## Author
 
-Sample Output
-
-```json
-{
-  "filename": "sample.exe",
-  "is_malicious": true,
-  "confidence": 0.92,
-  "detections": [
-    {
-      "rule": "Windows_Trojan_Generic",
-      "description": "Matches known trojan signature"
-    }
-  ],
-  "entropy_score": 7.8,
-  "suspicious_imports": ["VirtualAlloc", "CreateRemoteThread"]
-}
-```
-
-Use Cases
-
-· Incident response – quick triage of suspicious files
-· Threat hunting – scanning entire filesystems
-· Research – analyzing new malware families
-
-License
-
-MIT
-
-Author
-
-Mustafa Ramadhani – Senior Quantitative Systems & Data Engineer
+**Mustafa Ramadhani** — Software Engineer & Independent Security Researcher, Dar es Salaam, Tanzania
+📫 Mustafarama405@gmail.com · [LinkedIn](https://www.linkedin.com/in/mustafa-ramadhani-59394b354)
